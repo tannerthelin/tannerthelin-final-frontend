@@ -1,8 +1,15 @@
 <template>
 <div>
+  <v-row>
+      <v-col>
+        <h1>Get One Game from GraphQL</h1><br>
+        <p>Copy an ID from the "Get All" page and paste it here to retrieve that game.</p>
+        <v-text-field v-model="idInput" label="Enter Game ID..."></v-text-field>
+      </v-col>
+    </v-row>
   <!-- Apollo watched Graphql query -->
-  <ApolloQuery :query="require('../graphql/AllGames.gql')"
-   :variables="{ searchString }">
+  <ApolloQuery :query="require('../graphql/OneGame.gql')"
+   :variables="{ idInput }">
     <template v-slot="{ result: { loading, error, data } }">
       <!-- Loading -->
       <div v-if="loading" class="loading apollo">Loading...</div>
@@ -12,9 +19,8 @@
 
       <!-- Result -->
       <div v-else-if="data" class="result apollo">
-        <h1>Get All Games from GraphQL</h1>
         <v-row>
-          <v-col cols="3" v-for="(item, i) in data.Games" :key="i">
+          <v-col cols="3" v-for="(item, i) in data" :key="i">
             <v-card class="mx-auto" max-width="350">
               <v-card-text>
                 <div class="overline mb-4">Completed {{ item.date_completed }}</div>
@@ -87,7 +93,7 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({
-    searchString: "Test"
+    idInput: ''
   }),
 }
 </script>

@@ -1,47 +1,93 @@
 <template>
-  <div>
-    <h1>GraphQL Admin</h1>
-    <ApolloMutation
-      :mutation="require('../graphql/UpdateCourse.gql')"
-      :variables="{
-        id,
-        name,
-        description,
-        defaultCredits,
-        courseCode,
-        termsOffered,
-        }"
-        @done="onDone"
-    >
+<div>
+<!-- CREATE ITEM -->
+  <ApolloMutation
+    :mutation="require('../graphql/AddGame.gql')"
+    :variables="{
+      createTitle,
+      createSystem,
+      createDate
+      }"
+      @done="onDone"
+  >
     <template v-slot="{ mutate, loading, error }">
       <!-- Form here -->
       <v-form>
+          <h1>Edit Games in GraphQl</h1>
+          <br><br>
+          <h3>Create a New Game</h3>
           <v-row>
-            <v-col cols="12" md="12">
-              <v-text-field v-model="name" label="Course name" required filled></v-text-field>
+            <v-col cols="4" md="4">
+              <v-text-field v-model="createTitle" label="Game Title" required filled></v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="12">
-              <v-textarea v-model="description" label="Course description" rows="4" filled clearable></v-textarea>
+            <v-col cols="4" md="4">
+              <v-text-field v-model="createSystem" label="System" rows="4" required filled></v-text-field>
             </v-col>
-          </v-row>
-          <v-row >
-            <v-col cols="12" md="5">
-            <v-text-field v-model="defaultCredits" filled label="Default credits"></v-text-field>
+            <v-col cols="4" md="4">
+              <v-text-field v-model="createDate" label="Date Completed" rows="4" required filled></v-text-field>
             </v-col>
-            <v-col cols="12" md="2">
-            <v-text-field v-model="courseCode" filled label="Course code"></v-text-field>
-            </v-col>
-            <v-col cols="12" md="5">
-            <v-select :items="termsList" v-model="termsOffered" filled multiple label="Terms offered"></v-select>
-            </v-col>
-          </v-row>
-          <v-btn large color="secondary" :disabled="loading" @click="returnHome">Cancel</v-btn>
-          <v-btn large color="primary" :disabled="loading" @click="mutate()">Save</v-btn>
+          </v-row>        
+          <v-btn large color="primary" :disabled="loading" @click="mutate()">Create Game</v-btn>
           <p v-if="error">An error occurred: {{ error }}</p>
       </v-form>
     </template>
+  </ApolloMutation>
+
+  <br><br><br><br>
+
+<!-- UPDATE PERSON -->
+<ApolloMutation
+      :mutation="require('../graphql/UpdateGame.gql')"
+      :variables="{
+        updateId,
+        updateField,
+        updateValue
+        }"
+        @done="onDone"
+    >
+      <template v-slot="{ mutate, loading, error }">
+        
+        <!-- Form here -->
+        <v-form>
+            <h3>Update a Game's Title</h3>
+            <v-row>
+              <v-col cols="6" md="6">
+                <v-text-field v-model="updateId" label="ID of the game you want to update" required filled></v-text-field>
+              </v-col>
+              <v-col cols="6" md="6">
+                <v-text-field v-model="updateValue" label="New Value" required filled></v-text-field>
+              </v-col>
+            </v-row>
+          
+            <v-btn large color="primary" :disabled="loading" @click="mutate()">Update Game</v-btn>
+            <p v-if="error">An error occurred: {{ error }}</p>
+        </v-form>
+      </template>
+    </ApolloMutation>
+
+<br><br><br><br>
+
+<!-- DELETE PERSON -->
+    <ApolloMutation
+      :mutation="require('../graphql/DeleteGame.gql')"
+      :variables="{ removeId }"
+        @done="onDone"
+    >
+      <template v-slot="{ mutate, loading, error }">
+        
+        <!-- Form here -->
+        <v-form>
+            <h3>Delete an Item</h3>
+            <v-row>
+              <v-col cols="12" md="12">
+                <v-text-field v-model="removeId" label="ID of the game to delete" required filled></v-text-field>
+              </v-col>
+            </v-row>
+          
+            <v-btn large color="primary" :disabled="loading" @click="mutate()">Delete Game</v-btn>
+            <p v-if="error">An error occurred: {{ error }}</p>
+        </v-form>
+      </template>
     </ApolloMutation>
   </div>
 </template>
@@ -50,22 +96,20 @@
 export default {
   data: function() {
     return {
-      id: this.$store.getters.currentEditableCourse.id,
-      name: this.$store.getters.currentEditableCourse.name,
-      description: this.$store.getters.currentEditableCourse.description,
-      defaultCredits: this.$store.getters.currentEditableCourse.defaultCredits,
-      courseCode: this.$store.getters.currentEditableCourse.courseCode,
-      termsOffered: this.$store.getters.currentEditableCourse.termsOffered,
-      termsList: ['Fall', 'Spring', 'Summer']
+      createTitle: '',
+      createSystem: '',
+      createDate: '',
+
+      updateId: '',
+      updateField: '',
+      updateValue: '',
+
+      removeId: '',
     }
   },
   methods: {
     onDone() {
       return console.log('Done')
-    },
-    returnHome() {
-      console.log('Going home')
-      this.$router.push('/')
     }
   }
 }

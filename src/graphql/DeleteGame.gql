@@ -1,0 +1,10 @@
+mutation deleteOneGame ($removeId: String!) {
+  deleteOneGame(where: {
+  id: $removeId})
+  {
+    id
+    title
+    system
+    date_completed
+  }
+}

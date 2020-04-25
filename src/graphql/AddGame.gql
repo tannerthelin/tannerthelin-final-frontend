@@ -1,0 +1,13 @@
+mutation createGame ($createTitle: String!, $createSystem: String!, $createDate: String!){
+createGame(
+  title: $createTitle, 
+  system: $createSystem,
+  date_completed: $createDate
+) {
+  id
+  updatedAt
+  title
+  system
+  date_completed
+}
+}

@@ -13,7 +13,7 @@
 
     <!-- Apollo watched Graphql query -->
     <ApolloQuery
-      :query="require('../graphql/HelloWorld.gql')"
+      :query="require('../graphql/AllGames.gql')"
       :variables="{ name }"
     >
       <template slot-scope="{ result: { loading, error, data } }">

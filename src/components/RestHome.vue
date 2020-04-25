@@ -34,7 +34,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-html="game.title"></v-list-item-title>
-              <v-list-item-subtitle v-html="game.system"></v-list-item-subtitle>
+              <v-list-item-subtitle>{{game.system}} • Completed on {{game.date_completed}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>        
@@ -42,160 +42,86 @@
     </v-card>
     <br />
     <v-btn @click="getData" class="dataBtn" id="getDataBtn">Get Data</v-btn>
-
       </v-col>
 
 
       <v-col cols="6">
-        
-      </v-col>
-    </v-row>
-    <!-- <v-row>
-      <v-container>
-        <v-col cols="12">
-          <h1>RESTFUL API Home</h1>
-          <v-btn @click="getData" class="dataBtn" id="getDataBtn"
-            >Get Data</v-btn
+        <v-expansion-panels
+      v-model="panel"
+      :disabled="disabled"
+      multiple
+    >
+      <v-expansion-panel>
+        <v-expansion-panel-header>Create a game</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <v-form
+            ref="form"
+            v-model="valid"
+            :lazy-validation="lazy"
           >
-        </v-col>
-        <div>
-          <v-row>
-            <v-col cols="4" v-for="(item, i) in galaxies" :key="i">
-              <v-card class="mx-auto" max-width="350">
-                <v-card-text>
-                  <p class="name">
-                    ID: {{ item._id }}
-                  </p>
-                  <p><strong>Category:</strong> {{ item.category }}</p>
-                  <p><strong>Name:</strong>  {{ item.name }}</p>
-                  <p><strong>Constellation:</strong>  {{ item.constellation }}</p>
-                  <p><strong>Name Origin:</strong>  {{ item.nameOrigin }}</p>
-                  <p><strong>Distance from Milky Way (in millions of light years):</strong>  {{ item.distance }}</p>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-        </div>
-      </v-container>
-    </v-row>
+            <v-text-field
+              v-model="title"
+              label="Game Title"
+              required
+            ></v-text-field>            
 
-    <v-row>
-      <v-col cols="12">
-        <v-form>
-          <v-container>
-            <v-card-title>Get a Galaxy</v-card-title>
-            <v-row>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="singleGalaxyID" label="id" required filled></v-text-field>
-            </v-col>
-          </v-row>  
-            <v-btn large color="primary" @click="getOneGalaxy()"
-              >Get One Galaxy</v-btn
+            <v-select
+              v-model="system"
+              :items="systemchoices"
+              :rules="[v => !!v || 'Item is required']"
+              label="What system did you play this on?"
+              required
+            ></v-select>
+
+            <v-text-field
+              v-model="date_completed"
+              label="Date completed"
+              required
+            ></v-text-field>
+
+            <v-btn
+              :disabled="!valid"
+              color="success"
+              class="mr-4"
+              @click="validate"
             >
-          </v-container>
-        </v-form>
-        <v-container>
-          <div>
-            <v-row>
-              <v-col cols="3">
-                <v-card class="mx-auto" max-width="350">
-                  <v-card-text>
-                    <p class="name">{{ galaxy._id }}</p>
-                    <p>{{ galaxy.category }}</p>
-                    <p>{{ galaxy.name }}</p>
-                    <p>{{ galaxy.constellation }}</p>
-                    <p>{{ galaxy.nameOrigin }}</p>
-                    <p>{{ galaxy.distance }}</p>
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-          </div>
-        </v-container>
+              Validate
+            </v-btn>
+
+            <v-btn
+              color="error"
+              class="mr-4"
+              @click="reset"
+            >
+              Reset Form
+            </v-btn>
+
+            <v-btn
+              color="warning"
+              @click="resetValidation"
+            >
+              Reset Validation
+            </v-btn>
+          </v-form>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <v-expansion-panel>
+        <v-expansion-panel-header>Update a game</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Some content
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+
+      <v-expansion-panel>
+        <v-expansion-panel-header>Delete a game</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Some content
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
       </v-col>
     </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        <v-form>
-          <v-container>
-            <v-card-title>Create a Galaxy</v-card-title>
-            <v-row>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="createCategory" label="category" required filled></v-text-field>
-            </v-col>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="createName" label="name" required filled></v-text-field>
-            </v-col>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="createConstellation" label="constellation" required filled></v-text-field>
-            </v-col>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="createNameOrigin" label="name origin" required filled></v-text-field>
-            </v-col>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="createDistance" label="distance" required filled></v-text-field>
-            </v-col>
-          </v-row>  
-            <v-btn large color="primary" @click="createPerson()">Create Item</v-btn>
-          </v-container>
-        </v-form>
-      </v-col>
-    </v-row>
-
-
-  <v-row>
-      <v-col cols="12">
-        <v-form>
-          <v-container>
-                <v-card-title>Update an Item</v-card-title>
-            <v-row>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateID" label="ID" required filled></v-text-field>
-              </v-col>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateCategory" label="category" required filled></v-text-field>
-              </v-col>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateName" label="name" required filled></v-text-field>
-              </v-col>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateConstellation" label="constellation" required filled></v-text-field>
-              </v-col>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateNameOrigin" label="name origin" required filled></v-text-field>
-              </v-col>
-              <v-col cols="6" md="6">
-                <v-text-field v-model="updateDistance" label="distance" required filled></v-text-field>
-              </v-col>
-            </v-row>
-            <v-btn large color="primary" @click="updateGalaxy()">Update Item</v-btn>
-          </v-container>
-        </v-form>
-      </v-col>
-    </v-row>
-    
-
-    <v-row>
-      <v-col cols="12">
-        <v-form>
-          <v-container>
-            <v-card-title>Delete an Item</v-card-title>
-            <v-row>
-            <v-col cols="6" md="6">
-              <v-text-field v-model="deleteID" label="ID" required filled></v-text-field>
-            </v-col>
-          </v-row>  
-            <v-btn large color="primary" @click="deleteGalaxy()">Delete Item</v-btn>
-          </v-container>
-        </v-form>
-      </v-col>
-    </v-row> -->
-
-
-
-    
-    
   </div>
 </template>
 
@@ -205,6 +131,7 @@ import axios from "axios";
 export default {
   data: () => ({
     games: [],
+    systemchoices: ["Xbox One", "Playstation 4", "PC", "Nintendo Switch", "iOS", "Android"],
     galaxies: [],
     galaxy: [],
     singleGalaxyID: '12345',

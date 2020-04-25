@@ -1,0 +1,8 @@
+query filterGames ($searchString: String){
+  filterGames (searchstring: $searchString) {
+      id
+      title
+      system
+      date_completed
+  }
+}

@@ -1,7 +1,13 @@
 <template>
 <div>
+    <v-row>
+      <v-col>
+        <h1>Search for a Game</h1><br>
+        <v-text-field v-model="searchString" label="Search for a game..."></v-text-field>
+      </v-col>
+    </v-row>
   <!-- Apollo watched Graphql query -->
-  <ApolloQuery :query="require('../graphql/AllGames.gql')"
+  <ApolloQuery :query="require('../graphql/SearchGames.gql')"
    :variables="{ searchString }">
     <template v-slot="{ result: { loading, error, data } }">
       <!-- Loading -->
@@ -11,10 +17,9 @@
       <v-alert type="error" v-else-if="error" class="error apollo">An error occured</v-alert>
 
       <!-- Result -->
-      <div v-else-if="data" class="result apollo">
-        <h1>Get All Games from GraphQL</h1>
+      <div v-else-if="data" class="result apollo">        
         <v-row>
-          <v-col cols="3" v-for="(item, i) in data.Games" :key="i">
+          <v-col cols="3" v-for="(item, i) in data.filterGames" :key="i">
             <v-card class="mx-auto" max-width="350">
               <v-card-text>
                 <div class="overline mb-4">Completed {{ item.date_completed }}</div>
@@ -87,7 +92,7 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({
-    searchString: "Test"
+    searchString: "Hollow"
   }),
 }
 </script>

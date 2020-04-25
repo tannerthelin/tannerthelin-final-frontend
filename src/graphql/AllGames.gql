@@ -1,0 +1,9 @@
+query getAllGames {
+  Games {
+    id
+    updatedAt
+    title
+    system
+    date_completed
+	}
+}

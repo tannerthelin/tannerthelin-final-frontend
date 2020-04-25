@@ -20,16 +20,6 @@
             "date_completed": "March 12, 2020"
         },
         {
-            "title": "Sky: Children of the Light",
-            "system": "iOS",
-            "date_completed": "December 8, 2019"
-        },
-        {
-            "title": "Star Wars Jedi: Fallen Order",
-            "system": "Xbox One",
-            "date_completed": "January 1, 2020"
-        },
-        {
             "title": "Minecraft",
             "system": "Xbox One",
             "date_completed": "Octocber 31, 2020"
@@ -50,29 +40,9 @@
             "date_completed": "May 12, 2018"
         },
         {
-            "title": "Fortnite: Battle Royale",
-            "system": "Xbox One",
-            "date_completed": "August 13, 2018"
-        },
-        {
             "title": "Destiny 2",
             "system": "Xbox One",
             "date_completed": "September 19, 2019"
-        },
-        {
-            "title": "Borderlands 3",
-            "system": "Xbox One",
-            "date_completed": "November 28, 2020"
-        },
-        {
-            "title": "The Outer Worlds",
-            "system": "Xbox One",
-            "date_completed": "December 29, 2019"
-        },
-        {
-            "title": "Outer Wilds",
-            "system": "Xbox One",
-            "date_completed": "February 28, 2020"
         },
         {
             "title": "Mario Odyssey",
@@ -88,36 +58,6 @@
             "title": "Spiderman",
             "system": "Playstation 4",
             "date_completed": "July 12, 2019"
-        },
-        {
-            "title": "Apex Legends",
-            "system": "Xbox One",
-            "date_completed": "June 10, 2019"
-        },
-        {
-            "title": "Gears 5",
-            "system": "Xbox One",
-            "date_completed": "January 30, 2020"
-        },
-        {
-            "title": "Untitled Goose Game",
-            "system": "Nintendo Switch",
-            "date_completed": "October 12, 2019"
-        },
-        {
-            "title": "Luigi's Mansion",
-            "system": "Nintendo Switch",
-            "date_completed": "December 1, 2019"
-        },
-        {
-            "title": "Monster Hunter World",
-            "system": "Playstation 4",
-            "date_completed": "August 29, 2019"
-        },
-        {
-            "title": "Escape from Tarkov",
-            "system": "PC",
-            "date_completed": "November 28, 2019"
         },
         {
             "title": "Red Dead Redemption 2",

@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RestHome from '../views/RestHome.vue'
 import Admin from '../views/Admin.vue'
+import GetOne from './components/GetOne'
+import Search from './components/Search'
 
 Vue.use(VueRouter)
 
@@ -18,6 +20,16 @@ export default new VueRouter({
             path: '/rest-home',
             name: "rest-home",
             component: RestHome
+        },
+        {
+            path: '/get-one',
+            name: "get-one",
+            component: GetOne
+        },
+        {
+            path: '/search',
+            name: "search",
+            component: Search
         },
         {
             path: '/admin',

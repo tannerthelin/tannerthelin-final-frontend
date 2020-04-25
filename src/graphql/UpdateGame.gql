@@ -1,0 +1,12 @@
+mutation updateGame ($updateId: ID!, $updateValue: String!) {
+  updateGame(
+    id: $updateId
+    title: $updateValue
+  ) {
+    id
+    updatedAt
+    title
+    system
+    date_completed
+  }
+}

@@ -1,0 +1,8 @@
+query getGame ($idInput: ID) {
+  Game (id: $idInput) {
+      id
+      title
+      system
+      date_completed
+  }
+}
