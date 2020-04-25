@@ -64,13 +64,14 @@
 
     <!-- Main Content -->
     <v-content>
-      <v-container fluid>
+      <v-container fluid class="main-container">
         <router-view></router-view>
       </v-container>          
     </v-content>
 
   </v-app>
 </template>
+
 
 <script>
   export default {
@@ -83,59 +84,13 @@
   }
 </script>
 
+
 <style scoped>
-.routerLink {
-  text-decoration: none;
-}
+  .routerLink {
+    text-decoration: none;
+  }
+
+  .main-container {
+    padding: 20px 40px;
+  }
 </style>
-<!-- <template>
-  <v-app>
-    <v-app-bar
-      app
-      dark
-    >
-    <v-spacer></v-spacer>
-    <div>
-        <router-link class="routerLink" to="/">Home</router-link><span class="routerLink"> | </span>
-        <router-link class="routerLink" to="/admin">Admin</router-link><span class="routerLink"> | </span>
-        <router-link class="routerLink" to="/rest-home">Rest Home</router-link>
-      </div>
-    <v-spacer></v-spacer>
-    </v-app-bar>
-
-    <v-content>
-
-    </v-content>
-  </v-app>
-</template>
-
-<script>
-
-
-export default {
-  name: 'App',
-
-  components: {
-
-  },
-
-  data: () => ({
-    //
-  }),
-};
-</script>
-
-<style scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-}
-.routerLink {
-  color: #fff;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.main-sidebar {
-
-}
-</style> -->
