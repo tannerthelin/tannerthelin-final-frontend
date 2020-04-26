@@ -15,7 +15,7 @@ git clone https://github.com/tannerthelin/tannerthelin-final-frontend.git
 npm install
 ```
 
-## 3. Serve the frontend
+### 3. Serve the frontend
 ```
 npm run serve
 ```
