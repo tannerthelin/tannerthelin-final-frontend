@@ -6,6 +6,7 @@ import RestHome from '../views/RestHome.vue'
 import Admin from '../views/Admin.vue'
 import GetOne from './components/GetOne'
 import Search from './components/Search'
+import RestTest from './components/RestTest'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ export default new VueRouter({
             path: '/search',
             name: "search",
             component: Search
+        },
+        {
+            path: '/rest-test',
+            name: "rest-test",
+            component: RestTest
         },
         {
             path: '/admin',
